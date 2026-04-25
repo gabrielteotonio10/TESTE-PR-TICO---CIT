@@ -1,0 +1,24 @@
+.navbar {
+    background-color: var(--cor-primaria);
+    padding: 15px 5%;
+}
+.navbar-menu {
+    margin: 20px 0px;
+    display: flex;
+    align-items: center;
+    gap: 60px;
+}
+.navbar-menu a {
+    color: var(--cor-branco);
+    text-decoration: none;
+    font-weight: 600;
+}
+.navbar-menu a:hover {
+    color: var(--cor-destaque);
+}
+.navbar-logo {
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}

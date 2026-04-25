@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Monitoramento de nascente, córregos e pequenos rios">
+    <meta property="og:title" content="CIT - Monitoramento Ambiental">
+    <meta property="og:description"
+        content="Sistema para organizar e catalogar pontos de coleta ambiental, como nascentes, córregos e  rios">
+    <title>CIT - Monitoramento Ambiental</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-menu">
+            <a href="#">
+                <div class="navbar-logo"><i class="fa-solid fa-leaf"></i>Sistema CIT</div>
+            </a>
+            <a href="#pontos-coleta">Pontos</a>
+            <a href="#pontos-equipe">Equipes</a>
+        </div>
+    </nav>
+
+    <main>
+        <!--Secção dos pontos coleta-->
+        <section id="pontos-coleta">
+            <div class="section-header-coleta">
+                <h2>Pontos de Coleta</h2>
+                <button href="#adicionar-coleta" class="btn-adicionar-coleta">Novo Ponto</button>
+            </div>
+            <div class="controles-coleta">
+                <input type="text" class="campo-busca-coleta" placeholder="Pesquisar ponto de coleta...">
+                <select class="campo-ordenacao-coleta">
+                    <option>Ordenar por latitude</option>
+                    <option>Ordenar por longitude</option>
+                    <option>Ordenar por tipo do ponto</option>
+                </select>
+            </div>
+            <div class="grid-cards-coleta">
+                <div class="card-coleta">
+                    <div class="descricao-grid">
+                        <h4><i class="fa-solid fa-droplet"></i> Tipo: Nascente</h4>
+                        <h4><i class="fa-solid fa-map-location-dot"></i> Lat: -15.78 / Long: -47.92</h4>
+                        <h4 class="data-registro"><i class="fa-solid fa-calendar-days"></i> Coletado em: 25/04/2026</h4>
+                    </div>
+
+                    <div class="acoes-card-coleta">
+                        <button class="btn-acao btn-ver-coleta">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                        <button class="btn-acao btn-excluir-editar">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--Secção das equipes-->
+        <section id="pontos-equipe">
+            <div class="section-header-equipe">
+                <h2>Equipes de Monitoramento</h2>
+                <button href="#adicionar-equipe" class="btn-adicionar-equipe">Nova Equipe</button>
+            </div>
+            <div class="controles-equipe">
+                <input type="text" class="campo-busca-equipe" placeholder="Pesquisar equipe de monitoramento...">
+                <select class="campo-ordenacao-equipe">
+                    <option>Ordenar por nome</option>
+                    <option>Ordenar por região de atuação</option>
+                </select>
+            </div>
+            <div class="grid-cards-equipe">
+                <div class="card-equipe">
+                    <div class="descricao-grid">
+                        <h4><i class="fa-solid fa-group-arrows-rotate"></i> Equipe alpha</h4>
+                    </div>
+                    <div class="acoes-card-equipe">
+                        <button class="btn-acao btn-ver-coleta">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                        <button class="btn-acao btn-excluir-editar">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!--Modal dos pontos de coleta-->
+    <div id="adicionar-coleta" class="modal">
+        <div class="modal-conteudo">
+            <button type="button" class="sair-button"><i class="fa-solid fa-x"></i></button>
+            <h3>Cadastrar Novo Ponto de Coleta</h3>
+            <form class="from-coleta">
+                <div class="form-group">
+                    <label>Tipo do Ponto*</label>
+                    <select>
+                        <option>Nascente</option>
+                        <option>Vereda</option>
+                        <option>Córrego</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Latitude*</label>
+                        <input type="text" placeholder="-15.123">
+                    </div>
+                    <div class="form-group">
+                        <label>Longitude*</label>
+                        <input type="text" placeholder="-47.123">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Altitude (m)</label><input type="number">
+                    </div>
+                    <div class="form-group">
+                        <label>Data da Coleta</label>
+                        <input type="date">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Equipe Responsável</label>
+                    <select>
+                        <option>Selecione uma equipe...</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <div class="form-group"><label>Ph</label>
+                        <input type="number" step="0.1" min="0" max="14" placeholder="0.0">
+                    </div>
+                    <div class="form-group"><label>Turbidez</label>
+                        <input type="number" step="0.1" min="0" max="14" placeholder="0.0">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group"><label>Temperatura</label>
+                        <input type="number" step="0.1" min="-30" max="50" placeholder="0.0">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Condições do Entorno</label>
+                    <textarea rows="2"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Observações</label>
+                    <textarea rows="3"></textarea>
+                </div>
+                <div class="modal-buttons">
+                    <button type="button" class="btn-editar">Editar Ponto</button>
+                    <button type="button" class="btn-excluir">Excluir Ponto</button>
+                </div>
+                <button type="submit" class="btn-salvar">Cadastrar Ponto</button>
+            </form>
+        </div>
+    </div>
+
+    
+
+</body>
+
+</html>
