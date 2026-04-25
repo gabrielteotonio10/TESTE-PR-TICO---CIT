@@ -1,7 +1,3 @@
-/* No global.css */
-.invisivel {
-  display: none !important;
-}
 /*------- Modais gerais -------*/
 .modal {
   display: flex;

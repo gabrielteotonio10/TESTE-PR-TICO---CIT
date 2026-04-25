@@ -17,11 +17,11 @@
 
     <nav class="navbar">
         <div class="navbar-menu">
-            <a href="#">
+            <a href="#" class="pagina-inicial">
                 <div class="navbar-logo"><i class="fa-solid fa-leaf"></i>Sistema CIT</div>
             </a>
-            <a href="#pontos-coleta">Pontos</a>
-            <a href="#pontos-equipe">Equipes</a>
+            <a href="#pontos-coleta" class="pagina-pontos">Pontos</a>
+            <a href="#pontos-equipe" class="pagina-equipes">Equipes</a>
         </div>
     </nav>
 
@@ -30,7 +30,7 @@
         <section id="pontos-coleta">
             <div class="section-header-coleta">
                 <h2>Pontos de Coleta</h2>
-                <button href="#adicionar-coleta" class="btn-adicionar-coleta">Novo Ponto</button>
+                <button class="btn-adicionar-coleta">Novo Ponto</button>
             </div>
             <div class="controles-coleta">
                 <input type="text" class="campo-busca-coleta" placeholder="Pesquisar ponto de coleta...">
@@ -92,7 +92,7 @@
     </main>
 
     <!--Modal dos pontos de coleta-->
-    <div id="adicionar-coleta" class="modal hidden invisivel">
+    <div id="adicionar-coleta" class="modal invisivel">
         <div class="modal-conteudo">
             <button type="button" class="sair-button"><i class="fa-solid fa-x"></i></button>
             <h3>Cadastrar Novo Ponto de Coleta</h3>
@@ -202,7 +202,7 @@
 
     <!--Confirmar exclusão-->
     <div id="alerta-excluir" class="modal invisivel">
-        <div class="modal-conteudo modal-excluir" >
+        <div class="modal-conteudo modal-excluir">
             <h3>Confirmar Exclusão</h3>
             <p>Tem certeza que deseja apagar este registro?</p>
             <div class="botoes-confirmar-exclusao">
@@ -212,6 +212,34 @@
         </div>
     </div>
 
+    <!--Footer-->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-info">
+                <h3><i class="fa-solid fa-leaf"></i> Sistema CIT</h3>
+                <p>Plataforma dedicada ao monitoramento e preservação de recursos hídricos.
+                    Organizando dados de nascentes, córregos e rios para um futuro sustentável.</p>
+            </div>
+
+            <div class="footer-links">
+                <h4>Navegação</h4>
+                <ul>
+                    <li><a href="#" class="pagina-inicial">Início</a></li>
+                    <li><a href="#pontos-coleta" class="pagina-pontos">Pontos de Coleta</a></li>
+                    <li><a href="#pontos-equipe" class="pagina-equipes">Equipes</a></li>
+                    
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Sistema de Monitoramento CIT. Desenvolvido por Gabriel Teotônio.</p>
+        </div>
+    </footer>
+
+    <!--JavaScript-->
+    <script src="js/pages.js"></script>
 </body>
+
 
 </html>

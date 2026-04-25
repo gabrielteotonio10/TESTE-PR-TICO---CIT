@@ -1,0 +1,66 @@
+/*------- Footer geral -------*/
+.footer {
+    background-color: var(--cor-primaria);
+    color: var(--cor-branco);
+    padding: 40px 0 20px 0;
+    margin-top: 50px;
+}
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 30px;
+}
+.footer-info {
+    flex: 1;
+}
+/*Textos*/
+.footer-info h3 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    gap: 10px;
+}
+
+.footer-info p {
+    font-size: 14px;
+    color: var(--cor-branco);
+}
+.footer-links h4 {
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+/*Links*/
+.footer-links {
+    flex: 1;
+}
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+}
+.footer-links ul li {
+    margin-bottom: 5px;
+}
+.footer-links ul li a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s;
+}
+.footer-links ul li a:hover {
+    text-decoration: underline;
+}
+/*Parte de baixo*/
+.footer-bottom {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.6);
+}
