@@ -1,3 +1,7 @@
+/* No global.css */
+.invisivel {
+  display: none !important;
+}
 /*------- Modais gerais -------*/
 .modal {
   display: flex;
@@ -23,6 +27,9 @@
   margin: 20px;
   margin: 0 auto;
   position: relative;
+}
+.from-coleta {
+  margin-top: 20px;
 }
 
 /*------- Inputs -------*/
@@ -79,7 +86,7 @@
   width: 100%;
   margin-top: 10px;
 }
-.btn-salvar:hover{
+.btn-salvar:hover {
   background: rgba(68, 170, 81, 0.311);
   color: var(--cor-texto);
 }
@@ -99,23 +106,49 @@
   cursor: pointer;
   transition: filter 0.3s;
 }
-.btn-editar{
+.btn-editar {
   background: rgba(26, 1, 255, 0.772);
   color: white;
 }
-.btn-editar:hover{
-  background-color:  rgba(26, 1, 255, 0.16);
+.btn-editar:hover {
+  background-color: rgba(26, 1, 255, 0.16);
   color: var(--cor-texto);
 }
-.btn-excluir{
-  background: rgba(255, 1, 1, 0.769);
+.btn-excluir {
+  background: var(--cor-perigo);
   color: white;
 }
-.btn-excluir:hover{
-  background-color:  rgba(255, 1, 1, 0.306);
+.btn-excluir:hover {
+  background-color: rgba(255, 1, 1, 0.306);
   color: var(--cor-texto);
 }
 
-.from-coleta {
+/*------- Modal confirmar exclusão -------*/
+.modal-excluir {
+  border-top: 5px solid var(--cor-perigo);
+  text-align: center;
+  margin: auto;
+}
+.botoes-confirmar-exclusao {
   margin-top: 20px;
+}
+.btn-cancelar-exclusao {
+  background: #eee;
+  color: #333;
+  padding: 10px 20px;
+  border-radius: 4px;
+}
+.btn-cancelar-exclusao:hover {
+  background-color: rgba(0, 0, 0, 0.715);
+  color: var(--cor-borda);
+}
+.btn-confirmar-exclusao {
+  background: var(--cor-perigo); 
+  color: white; 
+  padding: 10px 20px; 
+  border-radius: 4px;
+}
+.btn-confirmar-exclusao:hover {
+  background-color: rgba(255, 0, 0, 0.612);
+  color:  rgb(2, 2, 2);
 }
