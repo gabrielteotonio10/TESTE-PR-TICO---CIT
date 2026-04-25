@@ -1,0 +1,26 @@
+{
+  "name": "teste-pratico-cit",
+  "version": "1.0.0",
+  "description": "Teste prático para a empresa CIT (Centro de Inteligência Territorial)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gabrielteotonio10/TESTE-PR-TICO---CIT.git"
+  },
+  "keywords": [
+    "monitoramento-ambiental",
+    "hidrologia"
+  ],
+  "author": "Gabriel Teotônio de Castro Coelho Costa",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gabrielteotonio10/TESTE-PR-TICO---CIT/issues"
+  },
+  "homepage": "https://github.com/gabrielteotonio10/TESTE-PR-TICO---CIT#readme",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.104.1"
+  }
+}
