@@ -5,6 +5,8 @@
 
 ---
 
+LINK PARA TESTE: https://vercel.com/gabrielteotonio80-2375s-projects/teste-pratico-cit
+
 ## 📋 Índice
 
 - [Sobre o Projeto](#-sobre-o-projeto)
