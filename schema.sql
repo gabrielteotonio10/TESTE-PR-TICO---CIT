@@ -1,8 +1,6 @@
--- COMANDOS EM SQL UTILIZADOS PARA CRIAR AS TABELAS DO BANCO DE DADOS
-
 -- Criação da tabela Equipes primeiro 
 CREATE TABLE equipes (
-    id_equipe SERIAL PRIMARY KEY,
+    id_equipe INT AUTO_INCREMENT PRIMARY KEY,
     nome_equipe VARCHAR(100) NOT NULL,
     integrantes TEXT,  
     contato VARCHAR(50),
@@ -11,7 +9,7 @@ CREATE TABLE equipes (
 
 -- Criação da tabela de Pontos de Coleta
 CREATE TABLE pontos_coleta (
-    id_ponto SERIAL PRIMARY KEY,
+    id_ponto INT AUTO_INCREMENT PRIMARY KEY,
     tipo_ponto VARCHAR(50) NOT NULL,    -- Nascente, vereda e córrego
     latitude DECIMAL(10, 8) NOT NULL,   
     longitude DECIMAL(11, 8) NOT NULL,  
@@ -28,5 +26,10 @@ CREATE TABLE pontos_coleta (
     CONSTRAINT fk_equipe 
         FOREIGN KEY (id_equipe) 
         REFERENCES equipes(id_equipe) 
-        ON DELETE SET NULL
+        ON DELETE SET NULL   -- Ponto continuara existindo mesmo que a equipe seja deletada
 );
+
+-- Exemplo de consulta para verificar os dados inseridos iguais
+SELECT *
+FROM pontos_coleta p
+JOIN equipes e ON p.id_equipe = e.id_equipe;
