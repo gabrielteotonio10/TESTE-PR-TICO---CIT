@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" type="image/svg" href="public/iconeMetaLogo.svg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Monitoramento de nascente, córregos e pequenos rios">
     <meta property="og:title" content="CIT - Monitoramento Ambiental">
@@ -41,22 +42,7 @@
                 </select>
             </div>
             <div class="grid-cards-coleta">
-                <div class="card-coleta">
-                    <div class="descricao-grid">
-                        <h4><i class="fa-solid fa-droplet"></i> Tipo: Nascente</h4>
-                        <h4><i class="fa-solid fa-map-location-dot"></i> Lat: -15.78 / Long: -47.92</h4>
-                        <h4 class="data-registro"><i class="fa-solid fa-calendar-days"></i> Coletado em: 25/04/2026</h4>
-                    </div>
-
-                    <div class="acoes-card-coleta">
-                        <button class="btn-acao btn-ver-coleta">
-                            <i class="fa-solid fa-eye"></i>
-                        </button>
-                        <button class="btn-acao btn-excluir-editar">
-                            <i class="fa-solid fa-pen-to-square"></i>
-                        </button>
-                    </div>
-                </div>
+                
             </div>
         </section>
 
@@ -82,7 +68,7 @@
                         <button class="btn-acao btn-ver-coleta">
                             <i class="fa-solid fa-eye"></i>
                         </button>
-                        <button class="btn-acao btn-excluir-editar">
+                        <button class="btn-acao btn-editar" data-id="">
                             <i class="fa-solid fa-pen-to-square"></i>
                         </button>
                     </div>
@@ -94,12 +80,14 @@
     <!--Modal dos pontos de coleta-->
     <div id="adicionar-coleta" class="modal invisivel">
         <div class="modal-conteudo">
-            <button type="button" class="sair-button"><i class="fa-solid fa-x"></i></button>
+            <button type="button" class="btn-fechar"><i class="fa-solid fa-x"></i></button>
             <h3>Cadastrar Novo Ponto de Coleta</h3>
-            <form class="from-coleta">
+            <form class="form-coleta">
                 <div class="form-group">
                     <label>Tipo do Ponto*</label>
-                    <select>
+                    <select id="select-tipo" required>
+                        <option value="">Selecione o tipo...</option>
+                        <option>Nascente</option>
                         <option>Nascente</option>
                         <option>Vereda</option>
                         <option>Córrego</option>
@@ -108,54 +96,51 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label>Latitude*</label>
-                        <input type="text" placeholder="-15.123">
+                        <input type="text" id="input-lat" placeholder="-15.123" required>
                     </div>
                     <div class="form-group">
                         <label>Longitude*</label>
-                        <input type="text" placeholder="-47.123">
+                        <input type="text" id="input-lng" placeholder="-47.123" required>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group">
-                        <label>Altitude (m)</label><input type="number">
+                        <label>Altitude (m)</label>
+                        <input type="number" id="input-altitude">
                     </div>
                     <div class="form-group">
                         <label>Data da Coleta</label>
-                        <input type="date">
+                        <input type="date" id="input-data">
                     </div>
                 </div>
                 <div class="form-group">
                     <label>Equipe Responsável</label>
-                    <select>
-                        <option>Selecione uma equipe...</option>
+                    <select id="select-equipe">
+                        <option value="">Selecione uma equipe...</option>
                     </select>
                 </div>
                 <div class="form-row">
                     <div class="form-group"><label>Ph</label>
-                        <input type="number" step="0.1" min="0" max="14" placeholder="0.0">
+                        <input type="number" id="input-ph" step="0.1" min="0" max="14" placeholder="0.0">
                     </div>
                     <div class="form-group"><label>Turbidez</label>
-                        <input type="number" step="0.1" min="0" max="14" placeholder="0.0">
+                        <input type="number" id="input-turbidez" step="0.1" min="0" max="14" placeholder="0.0">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group"><label>Temperatura</label>
-                        <input type="number" step="0.1" min="-30" max="50" placeholder="0.0">
+                        <input type="number" id="input-temp" step="0.1" min="-30" max="50" placeholder="0.0">
                     </div>
                 </div>
                 <div class="form-group">
                     <label>Condições do Entorno</label>
-                    <textarea rows="2"></textarea>
+                    <textarea id="input-entorno" rows="2"></textarea>
                 </div>
                 <div class="form-group">
                     <label>Observações</label>
-                    <textarea rows="3"></textarea>
+                    <textarea id="input-obs" rows="3"></textarea>
                 </div>
-                <div class="modal-buttons">
-                    <button type="button" class="btn-editar">Editar Ponto</button>
-                    <button type="button" class="btn-excluir">Excluir Ponto</button>
-                </div>
-                <button type="submit" class="btn-salvar">Cadastrar Ponto</button>
+                <button type="submit" id="btn-salvar-coleta" class="btn-salvar">Cadastrar Ponto</button>
             </form>
         </div>
     </div>
@@ -163,7 +148,7 @@
     <!--Modal das equipes-->
     <div id="adicionar-equipe" class="modal invisivel">
         <div class="modal-conteudo">
-            <button type="button" class="sair-button"><i class="fa-solid fa-x"></i></button>
+            <button type="button" class="btn-fechar"><i class="fa-solid fa-x"></i></button>
             <h3>Cadastrar Nova Equipe</h3>
             <form class="from-coleta">
                 <div class="form-group">
@@ -182,21 +167,24 @@
                     <label>Região de Atuação</label>
                     <input type="text" placeholder="Ex: Cerrado Mineiro">
                 </div>
-                <div class="modal-buttons">
-                    <button type="button" class="btn-editar">Editar Ponto</button>
-                    <button type="button" class="btn-excluir">Excluir Ponto</button>
-                </div>
                 <button type="submit" class="btn-salvar">Cadastrar Equipe</button>
             </form>
         </div>
     </div>
 
-    <!--Vizualização completa das informações-->
-    <div id="modal-detalhe" class="modal invisivel">
+    <!--Vizualização de tudo do ponto de coleta-->
+    <div id="modal-ver-coleta" class="modal invisivel">
         <div class="modal-conteudo">
-            <button type="button" class="sair-button"><i class="fa-solid fa-x"></i></button>
-            <h3>Detalhes do Ponto</h3>
-            <p>Informações detalhadas aqui...</p>
+            <button type="button" class="btn-fechar"><i class="fa-solid fa-x"></i></button>
+            <h3>Detalhes do Ponto de Coleta</h3>
+    
+            <div id="dados-visualizacao-coleta" class="detalhes-conteudo">
+            </div>
+    
+            <div class="modal-buttons">
+                <button type="button" id="btn-modal-ver-editar" class="btn-editar-visualizacao">Editar Ponto</button>
+                <button type="button" id="btn-modal-ver-excluir" class="btn-excluir-visualizacao">Excluir Ponto</button>
+            </div>
         </div>
     </div>
 
@@ -206,10 +194,16 @@
             <h3>Confirmar Exclusão</h3>
             <p>Tem certeza que deseja apagar este registro?</p>
             <div class="botoes-confirmar-exclusao">
-                <button class="btn-acao btn-cancelar-exclusao">Cancelar</button>
-                <button class="btn-acao btn-confirmar-exclusao">Sim, Excluir</button>
+                <button id="btn-cancelar-exclusao" class="btn-acao btn-cancelar-exclusao" >Cancelar</button>
+                <button id="btn-confirmar-exclusao" class="btn-acao btn-confirmar-exclusao">Sim, Excluir</button>
             </div>
         </div>
+    </div>
+
+    <!--Avisos-->
+    <div id="aviso-flutuante" class="aviso-sucesso invisivel">
+        <i class="fa-solid fa-check-circle"></i>
+        <h2 id="aviso-texto" class="aviso-texto"></h2>
     </div>
 
     <!--Footer-->
@@ -227,7 +221,7 @@
                     <li><a href="#" class="pagina-inicial">Início</a></li>
                     <li><a href="#pontos-coleta" class="pagina-pontos">Pontos de Coleta</a></li>
                     <li><a href="#pontos-equipe" class="pagina-equipes">Equipes</a></li>
-                    
+
                 </ul>
             </div>
         </div>
@@ -246,6 +240,5 @@
     <script type="module" src="src/js/api/apiEquipes.js"></script>
     <script type="module" src="src/js/api/apiPontosColeta.js"></script>
 </body>
-
 
 </html>

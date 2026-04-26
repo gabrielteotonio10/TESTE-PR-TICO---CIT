@@ -54,7 +54,7 @@
 
 /*------- Botões -------*/
 /*Botão de sair*/
-.sair-button {
+.btn-fechar {
   top: 15px;
   right: 15px;
   background: none;
@@ -66,10 +66,11 @@
   margin: 10px;
   position: absolute;
 }
-.sair-button:hover {
+.btn-fechar:hover {
   color: var(--cor-perigo);
   transform: scale(1.1);
 }
+
 /*Botão de cadastrar/salvar*/
 .btn-salvar {
   background: var(--cor-primaria);
@@ -86,36 +87,15 @@
   background: rgba(68, 170, 81, 0.311);
   color: var(--cor-texto);
 }
-/*Botões de editar e excluir*/
-.modal-buttons {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 15px;
-  margin-top: 10px;
-}
-.modal-buttons button {
-  flex: 1;
-  padding: 10px;
-  border: none;
-  border-radius: 4px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: filter 0.3s;
-}
+/*Botão de editar*/
+
 .btn-editar {
+  margin-left: 10px;
   background: rgba(26, 1, 255, 0.772);
   color: white;
 }
 .btn-editar:hover {
   background-color: rgba(26, 1, 255, 0.16);
-  color: var(--cor-texto);
-}
-.btn-excluir {
-  background: var(--cor-perigo);
-  color: white;
-}
-.btn-excluir:hover {
-  background-color: rgba(255, 1, 1, 0.306);
   color: var(--cor-texto);
 }
 
@@ -139,12 +119,33 @@
   color: var(--cor-borda);
 }
 .btn-confirmar-exclusao {
-  background: var(--cor-perigo); 
-  color: white; 
-  padding: 10px 20px; 
+  background: var(--cor-perigo);
+  color: white;
+  padding: 10px 20px;
   border-radius: 4px;
 }
 .btn-confirmar-exclusao:hover {
   background-color: rgba(255, 0, 0, 0.612);
-  color:  rgb(2, 2, 2);
+  color: rgb(2, 2, 2);
 }
+
+/*------- Aviso para edição e cadastro -------*/
+.aviso-sucesso {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  margin: auto;
+  background-color: var(--cor-secundaria); 
+  color: white;
+  padding: 12px 25px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  z-index: 20000; 
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  transition: all 0.4s ease; 
+}
+
+

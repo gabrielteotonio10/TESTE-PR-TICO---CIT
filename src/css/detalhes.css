@@ -1,0 +1,47 @@
+.detalhes-conteudo {
+  margin: 20px 0;
+  line-height: 1.6;
+}
+.detalhes-conteudo p {
+  margin-bottom: 8px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 5px;
+}
+.detalhes-conteudo strong {
+  color: var(--cor-primaria); 
+}
+
+/*------- Botões -------*/
+
+/*Botões de editar*/
+.modal-buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+  margin-top: 10px;
+}
+.modal-buttons button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: filter 0.3s;
+}
+.btn-editar-visualizacao {
+  background: rgba(26, 1, 255, 0.772);
+  color: white;
+}
+.btn-editar-visualizacao:hover {
+  background-color: rgba(26, 1, 255, 0.16);
+  color: var(--cor-texto);
+}
+.btn-excluir-visualizacao {
+  background: var(--cor-perigo);
+  color: white;
+}
+.btn-excluir-visualizacao:hover {
+  background-color: rgba(255, 1, 1, 0.306);
+  color: var(--cor-texto);
+}

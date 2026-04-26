@@ -1,3 +1,5 @@
+-- COMANDOS EM SQL UTILIZADOS PARA CRIAR AS TABELAS DO BANCO DE DADOS
+
 -- Criação da tabela Equipes primeiro 
 CREATE TABLE equipes (
     id_equipe SERIAL PRIMARY KEY,

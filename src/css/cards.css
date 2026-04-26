@@ -92,6 +92,23 @@
   outline: none;
 }
 
+/* Botão Salvar */
+.btn-salvar {
+  background: var(--cor-primaria);
+  color: white;
+  padding: 10px 25px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  width: 100%;
+  margin-top: 10px;
+}
+.btn-salvar:hover {
+  background: rgba(68, 170, 81, 0.311);
+  color: var(--cor-texto);
+}
+
 /* Botão Visualizar */
 .btn-ver-coleta {
   color: var(--cor-primaria);
@@ -103,11 +120,11 @@
 }
 
 /* Botão Editar */
-.btn-excluir-editar {
+.btn-excluir {
   color: var(--cor-aviso);
   background-color: rgba(0, 74, 245, 0.1);
 }
-.btn-excluir-editar:hover {
+.btn-excluir:hover {
   background-color: var(--cor-secundaria);
   color: var(--cor-branco);
 }

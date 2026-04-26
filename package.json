@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gabrielteotonio10/TESTE-PR-TICO---CIT.git"
+    "url": "git+https://github.com/gabrielteotonio10/TESTE-PRATICO-CIT.git"
   },
   "keywords": [
     "monitoramento-ambiental",
@@ -20,13 +20,16 @@
   "author": "Gabriel Teotônio de Castro Coelho Costa",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/gabrielteotonio10/TESTE-PR-TICO---CIT/issues"
+    "url": "https://github.com/gabrielteotonio10/TESTE-PRATICO-CIT/issues"
   },
-  "homepage": "https://github.com/gabrielteotonio10/TESTE-PR-TICO---CIT#readme",
+  "homepage": "https://github.com/gabrielteotonio10/TESTE-PRATICO-CIT#readme",
   "dependencies": {
     "@supabase/supabase-js": "^2.104.1"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.2.1",
+    "globals": "^17.5.0",
     "vite": "^8.0.10"
   }
 }

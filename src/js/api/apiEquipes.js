@@ -66,12 +66,10 @@ const equipesApi = {
         .update(equipe)
         .eq("id_equipe", equipe.id_equipe)
         .select(); // Retorna o registro inserido
-
+      // Caso não tenha editado
       if (!data || data.length === 0) {
         throw new Error("Nenhuma equipe encontrada para atualizar.");
       }
-
-      // Caso não tenha editado
       if (error) throw error;
 
       // Pega o item editado
@@ -97,7 +95,9 @@ const equipesApi = {
       return true;
     } catch (error) {
       console.error("Detalhe do erro:", error);
-      alert("Erro ao excluir equipe. Verifique se ela possui pontos de coleta vinculados.");
+      alert(
+        "Erro ao excluir equipe. Verifique se ela possui pontos de coleta vinculados.",
+      );
       throw error;
     }
   },

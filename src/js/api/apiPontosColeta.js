@@ -70,6 +70,7 @@ const pontosColetaApi = {
       if (!data || data.length === 0) {
         throw new Error("Nenhum registro foi encontrado para atualizar.");
       }
+      if (error) throw error;
       // Pega o item editado
       return data[0];
     } catch (error) {
@@ -83,7 +84,7 @@ const pontosColetaApi = {
   async deletePontoColeta(id_ponto) {
     try {
       const { error } = await supabase
-        .from("ponto_coleta")
+        .from("pontos_coleta")
         .delete()
         .eq("id_ponto", id_ponto);
 
