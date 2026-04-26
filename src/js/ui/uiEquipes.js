@@ -200,6 +200,26 @@ export const uiEquipes = {
     };
   },
 
+  //-------- Função para atualizar as seleções de equipes dentro de pontos de coleta --------
+  async atualizarOpcoesEquipe() {
+    // Carrega as equipes para o select
+    const selectEquipe = document.querySelector("#select-equipe");
+    selectEquipe.innerHTML = '<option value="">Selecione uma equipe</option>';
+    try {
+      const equipes = await apiEquipes.getEquipes();
+      // Preenche o select com as equipes
+      equipes.forEach((equipe) => {
+        const option = document.createElement("option");
+        option.value = equipe.id_equipe;
+        option.textContent = equipe.nome_equipe;
+        selectEquipe.appendChild(option);
+      });
+    } catch (error) {
+      console.error("Erro ao carregar equipes para o select:", error);
+      alert("Erro ao carregar equipes para o formulário");
+    }
+  },
+
   //-------- Função para configurar os eventos do formulário --------
   configurarEventos() {
     const form = document.querySelector(".form-equipe");
@@ -224,6 +244,7 @@ export const uiEquipes = {
           document
             .querySelector("#adicionar-equipe")
             .classList.add("invisivel");
+          await this.atualizarOpcoesEquipe(); // Atualiza as opções do select de equipes no formulário de ponto de coleta
           this.renderizarEquipes(); // Atualiza a tela com a nova
           this.configurarControles(); // Reconfigura os controles para atualizar a lista de equipes
         } catch (error) {

@@ -99,6 +99,21 @@
   color: var(--cor-branco);
 }
 
+/*Botão de criar equipe dentro do modal de ponsto de coleta*/
+.btn-adicionar-equipe-pontos{
+  margin-bottom: 10px;
+  background: var(--cor-primaria);
+  color: white;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.btn-adicionar-equipe-pontos:hover {
+  background: rgba(68, 170, 81, 0.311);
+  color: var(--cor-texto);
+}
+
 /*------- Modal confirmar exclusão -------*/
 .modal-excluir {
   border-top: 5px solid var(--cor-perigo);
