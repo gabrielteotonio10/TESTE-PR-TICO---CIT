@@ -1,6 +1,0 @@
-<div class="modal-buttons">
-                    <button type="button" class="btn-editar">Editar Ponto</button>
-                    <button type="button" class="btn-excluir">Excluir Ponto</button>
-                </div>
-
-

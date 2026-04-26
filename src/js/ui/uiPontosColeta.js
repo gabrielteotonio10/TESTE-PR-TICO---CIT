@@ -1,4 +1,5 @@
 import apiPontosColeta from "../api/apiPontosColeta.js";
+import apiEquipes from "../api/apiEquipes.js";
 
 export const uiPontosColeta = {
   // Variável pra armazenar o id que será editado
@@ -52,7 +53,9 @@ export const uiPontosColeta = {
     // Se clicar em mostrar abre a visualização
     botaoMostrar.onclick = async () => {
       try {
-        const dadosCompletos = await apiPontosColeta.getPontoColetaById(ponto.id_ponto);
+        const dadosCompletos = await apiPontosColeta.getPontoColetaById(
+          ponto.id_ponto,
+        );
         uiPontosColeta.abrirModalVisualizacao(dadosCompletos);
       } catch (error) {
         console.error("Erro ao carregar dados do ponto:", error);
@@ -68,6 +71,19 @@ export const uiPontosColeta = {
     // Se clicar em editar pergunta se tem certeza e exclui
     botaoEditar.onclick = async () => {
       try {
+        // Pega os dados das equipes para preencher o select
+        const equipes = await apiEquipes.getEquipes();
+        const selectEquipe = document.querySelector("#select-equipe");
+        selectEquipe.innerHTML =
+          '<option value="">Nenhuma equipe associada</option>';
+        // Preenche o select com as equipes
+        equipes.forEach((equipe) => {
+          const option = document.createElement("option");
+          option.value = equipe.id_equipe;
+          option.textContent = equipe.nome_equipe;
+          selectEquipe.appendChild(option);
+        });
+        // Pega os dados completos do ponto para preencher o formulário
         const dadosCompletos = await apiPontosColeta.getPontoColetaById(ponto.id_ponto);
         uiPontosColeta.preencherFormulario(dadosCompletos);
       } catch (error) {
@@ -100,7 +116,7 @@ export const uiPontosColeta = {
     document.querySelector("#input-lng").value = ponto.longitude;
     document.querySelector("#input-altitude").value = ponto.altitude || "";
     document.querySelector("#input-data").value = ponto.data_coleta || "";
-    document.querySelector("#select-equipe").value = ponto.id_equipe || "";
+    document.querySelector("#select-equipe").value = ponto.id_equipe || ""; // Id serve como value do html criado com todas as equipes
     document.querySelector("#input-ph").value = ponto.ph || "";
     document.querySelector("#input-turbidez").value = ponto.turbidez || "";
     document.querySelector("#input-temp").value = ponto.temperatura || "";
@@ -164,6 +180,7 @@ export const uiPontosColeta = {
           confirmarExclusao.classList.add("invisivel");
           // Atualiza a tela
           this.renderizarPontosColeta();
+          this.configurarControles();
         } catch (error) {
           console.error("Erro ao excluir ponto:", error);
           alert("Erro ao excluir ponto.");

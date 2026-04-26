@@ -1,5 +1,6 @@
 import { uiPontosColeta } from "./ui/uiPontosColeta.js";
 import { uiEquipes } from "./ui/uiEquipes.js";
+import apiEquipes from "./api/apiEquipes.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   // -------- Troca de páginas --------
@@ -51,11 +52,27 @@ document.addEventListener("DOMContentLoaded", () => {
   const botoesFechar = document.querySelectorAll(".btn-fechar");
   // Abre o modal de adicionar ponto de coleta
   if (btnAdicionarColeta) {
-    btnAdicionarColeta.addEventListener("click", (e) => {
+    btnAdicionarColeta.addEventListener("click", async (e) => {
       e.preventDefault();
       // Limpa o formulario
       uiPontosColeta.limparFormulario();
       mostrar(modalAdicionarColeta);
+      // Carrega as equipes para o select
+      const selectEquipe = document.querySelector("#select-equipe");
+      selectEquipe.innerHTML = '<option value="">Selecione uma equipe</option>';
+      try {
+        const equipes = await apiEquipes.getEquipes();
+        // Preenche o select com as equipes
+        equipes.forEach((equipe) => {
+          const option = document.createElement("option");
+          option.value = equipe.id_equipe;
+          option.textContent = equipe.nome_equipe;
+          selectEquipe.appendChild(option);
+        });
+      } catch (error) {
+        console.error("Erro ao carregar equipes para o select:", error);
+        alert("Erro ao carregar equipes para o formulário");
+      }
     });
   }
   // Abre o modal de adicionar equipe

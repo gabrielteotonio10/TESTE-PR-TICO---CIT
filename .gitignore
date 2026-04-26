@@ -28,3 +28,6 @@ Desktop.ini
 *.suo
 *.ntvs*
 *.njsproj
+
+# Cache do ESLint
+.eslintcache

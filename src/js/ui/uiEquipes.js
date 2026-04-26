@@ -1,4 +1,5 @@
 import apiEquipes from "../api/apiEquipes.js";
+import apiPontosColeta from "../api/apiPontosColeta.js";
 
 export const uiEquipes = {
   // Variável pra armazenar o id que será editado
@@ -111,15 +112,28 @@ export const uiEquipes = {
   },
 
   //-------- Mostra todas as informações --------
-  abrirModalVisualizacao(equipe) {
+  async abrirModalVisualizacao(equipe) {
     const divDados = document.querySelector("#dados-visualizacao-equipe");
-    // Pega todos os dados que tem
-    divDados.innerHTML = `
+    try {
+      const pontos = await apiPontosColeta.getPontosColeta();
+      let quantidadePontos = 0;
+      pontos.forEach((ponto) => {
+        if (ponto.id_equipe === equipe.id_equipe) {
+          quantidadePontos++;
+        }
+      });
+      // Pega todos os dados que tem
+      divDados.innerHTML = `
       <p><strong>Nome:</strong> ${equipe.nome_equipe}</p>
       <p><strong>Integrantes:</strong> ${equipe.integrantes ? equipe.integrantes : "Não informados"}</p>
       <p><strong>Contato:</strong> ${equipe.contato ? equipe.contato : "Não informado"}</p>
       <p><strong>Região de Atuação:</strong> ${equipe.regiao_atuacao ? equipe.regiao_atuacao : "Não informada"}</p>
+      <p><strong>Número de pontos de coleta:</strong> ${quantidadePontos}</p>
     `;
+    } catch (error) {
+      console.error("Erro ao carregar dados para visualização:", error);
+      alert("Erro ao carregar dados para visualização.");
+    }
 
     // Botão editar dentro
     const btnEditar = document.querySelector("#btn-modal-ver-editar-equipe");
@@ -153,6 +167,7 @@ export const uiEquipes = {
           confirmarExclusao.classList.add("invisivel");
           // Atualiza a tela
           this.renderizarEquipes();
+          this.configurarControles();
         } catch (error) {
           console.error("Erro ao excluir equipe:", error);
           alert("Erro ao excluir equipe.");
