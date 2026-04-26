@@ -1,4 +1,5 @@
 import { uiPontosColeta } from "./ui/uiPontosColeta.js";
+import { uiEquipes } from "./ui/uiEquipes.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   console.log("CIT: Script carregado");
@@ -9,4 +10,12 @@ document.addEventListener("DOMContentLoaded", () => {
   uiPontosColeta.renderizarPontosColeta();
   // Configura a pesquisa e ordenação
   uiPontosColeta.configurarControles();
+
+  // -------- Equipes --------
+  // Caso queira salvar, o ambiente é preparado
+  uiEquipes.configurarEventos();
+  // Mostra as equipes cadastradas
+  uiEquipes.renderizarEquipes();
+  // Configura a pesquisa e ordenação
+  uiEquipes.configurarControles();
 });

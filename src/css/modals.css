@@ -91,12 +91,12 @@
 
 .btn-editar {
   margin-left: 10px;
-  background: rgba(26, 1, 255, 0.772);
-  color: white;
+  background: rgba(0, 81, 255, 0.144);
+  color: rgba(0, 81, 255, 0.877);
 }
 .btn-editar:hover {
-  background-color: rgba(26, 1, 255, 0.16);
-  color: var(--cor-texto);
+  background: rgb(0, 81, 255);
+  color: var(--cor-branco);
 }
 
 /*------- Modal confirmar exclusão -------*/
@@ -132,14 +132,12 @@
 /*------- Aviso para edição e cadastro -------*/
 .aviso-sucesso {
   position: fixed;
-  top: 20px;
-  left: 50%;
-  margin: auto;
+  bottom: 10px;
+  right: 10px;
   background-color: var(--cor-secundaria); 
   color: white;
   padding: 12px 25px;
   border-radius: 8px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   z-index: 20000; 
   display: flex;
   align-items: center;
@@ -147,5 +145,3 @@
   font-weight: 600;
   transition: all 0.4s ease; 
 }
-
-

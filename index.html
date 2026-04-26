@@ -42,7 +42,7 @@
                 </select>
             </div>
             <div class="grid-cards-coleta">
-                
+                <!-- Cards que serão gerados -->
             </div>
         </section>
 
@@ -50,29 +50,17 @@
         <section id="pontos-equipe">
             <div class="section-header-equipe">
                 <h2>Equipes de Monitoramento</h2>
-                <button href="#adicionar-equipe" class="btn-adicionar-equipe">Nova Equipe</button>
+                <button class="btn-adicionar-equipe">Nova Equipe</button>
             </div>
             <div class="controles-equipe">
                 <input type="text" class="campo-busca-equipe" placeholder="Pesquisar equipe de monitoramento...">
                 <select class="campo-ordenacao-equipe">
-                    <option>Ordenar por nome</option>
-                    <option>Ordenar por região de atuação</option>
+                    <option value="nome">Ordenar por nome</option>
+                    <option value="regiao">Ordenar por região de atuação</option>
                 </select>
             </div>
             <div class="grid-cards-equipe">
-                <div class="card-equipe">
-                    <div class="descricao-grid">
-                        <h4><i class="fa-solid fa-group-arrows-rotate"></i> Equipe alpha</h4>
-                    </div>
-                    <div class="acoes-card-equipe">
-                        <button class="btn-acao btn-ver-coleta">
-                            <i class="fa-solid fa-eye"></i>
-                        </button>
-                        <button class="btn-acao btn-editar" data-id="">
-                            <i class="fa-solid fa-pen-to-square"></i>
-                        </button>
-                    </div>
-                </div>
+                <!-- Cards que serão gerados -->
             </div>
         </section>
     </main>
@@ -150,24 +138,24 @@
         <div class="modal-conteudo">
             <button type="button" class="btn-fechar"><i class="fa-solid fa-x"></i></button>
             <h3>Cadastrar Nova Equipe</h3>
-            <form class="from-coleta">
+            <form class="form-equipe">
                 <div class="form-group">
-                    <label>Nome da Equipe</label>
-                    <input type="text" placeholder="Ex: Equipe Alfa">
+                    <label>Nome da Equipe*</label>
+                    <input type="text" id="input-nome-equipe" placeholder="Ex: Equipe Alfa" required>
                 </div>
                 <div class="form-group">
                     <label>Integrantes</label>
-                    <textarea placeholder="Nomes separados por vírgula"></textarea>
+                    <textarea id="input-integrantes" placeholder="Nomes separados por vírgula" rows="3"></textarea>
                 </div>
                 <div class="form-group">
                     <label>Contato</label>
-                    <input type="text" placeholder="(31) 9999-9999">
+                    <input type="text" id="input-contato" placeholder="(31) 9999-9999">
                 </div>
                 <div class="form-group">
                     <label>Região de Atuação</label>
-                    <input type="text" placeholder="Ex: Cerrado Mineiro">
+                    <input type="text" id="input-regiao" placeholder="Ex: Cerrado Mineiro">
                 </div>
-                <button type="submit" class="btn-salvar">Cadastrar Equipe</button>
+                <button type="submit" id="btn-salvar-equipe" class="btn-salvar">Cadastrar Equipe</button>
             </form>
         </div>
     </div>
@@ -177,13 +165,29 @@
         <div class="modal-conteudo">
             <button type="button" class="btn-fechar"><i class="fa-solid fa-x"></i></button>
             <h3>Detalhes do Ponto de Coleta</h3>
-    
+
             <div id="dados-visualizacao-coleta" class="detalhes-conteudo">
             </div>
-    
+
             <div class="modal-buttons">
                 <button type="button" id="btn-modal-ver-editar" class="btn-editar-visualizacao">Editar Ponto</button>
                 <button type="button" id="btn-modal-ver-excluir" class="btn-excluir-visualizacao">Excluir Ponto</button>
+            </div>
+        </div>
+    </div>
+
+    <!--Vizualização de tudo das equipes-->
+    <div id="modal-ver-equipe" class="modal invisivel">
+        <div class="modal-conteudo">
+            <button type="button" class="btn-fechar"><i class="fa-solid fa-x"></i></button>
+            <h3>Detalhes da Equipe</h3>
+    
+            <div id="dados-visualizacao-equipe" class="detalhes-conteudo">
+            </div>
+    
+            <div class="modal-buttons">
+                <button type="button" id="btn-modal-ver-editar-equipe" class="btn-editar-visualizacao">Editar Equipe</button>
+                <button type="button" id="btn-modal-ver-excluir-equipe" class="btn-excluir-visualizacao">Excluir Equipe</button>
             </div>
         </div>
     </div>
@@ -194,7 +198,7 @@
             <h3>Confirmar Exclusão</h3>
             <p>Tem certeza que deseja apagar este registro?</p>
             <div class="botoes-confirmar-exclusao">
-                <button id="btn-cancelar-exclusao" class="btn-acao btn-cancelar-exclusao" >Cancelar</button>
+                <button id="btn-cancelar-exclusao" class="btn-acao btn-cancelar-exclusao">Cancelar</button>
                 <button id="btn-confirmar-exclusao" class="btn-acao btn-confirmar-exclusao">Sim, Excluir</button>
             </div>
         </div>

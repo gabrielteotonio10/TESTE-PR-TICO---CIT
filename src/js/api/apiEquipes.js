@@ -8,7 +8,7 @@ const equipesApi = {
       const { data, error } = await supabase
         .from("equipes")
         .select("*")
-        .order("nome_equipe", { ascending: true }); // Traz em ordem alfabética
+        .order("nome_equipe", { ascending: true }); // Traz em ordem alfabética crescente
 
       if (error) throw error;
 

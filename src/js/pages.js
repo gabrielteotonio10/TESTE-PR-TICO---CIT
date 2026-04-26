@@ -1,4 +1,5 @@
 import { uiPontosColeta } from "./ui/uiPontosColeta.js";
+import { uiEquipes } from "./ui/uiEquipes.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   // -------- Troca de páginas --------
@@ -61,6 +62,8 @@ document.addEventListener("DOMContentLoaded", () => {
   if (btnAdicionarEquipe) {
     btnAdicionarEquipe.addEventListener("click", (e) => {
       e.preventDefault();
+      // Limpa o formulario
+      uiEquipes.limparFormulario();
       mostrar(modalAdicionarEquipe);
     });
   }

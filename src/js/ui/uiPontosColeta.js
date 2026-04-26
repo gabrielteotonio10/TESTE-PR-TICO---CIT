@@ -4,10 +4,9 @@ export const uiPontosColeta = {
   // Variável pra armazenar o id que será editado
   idPontoSendoEditado: null,
 
-  // Função para renderizar os pontos de coleta
+  //-------- Função para renderizar os pontos de coleta --------
   async renderizarPontosColeta() {
     const listaPontos = document.querySelector(".grid-cards-coleta");
-
     try {
       const pontos = await apiPontosColeta.getPontosColeta();
       listaPontos.innerHTML = ""; // Limpa a tela antes de desenhar
@@ -23,60 +22,8 @@ export const uiPontosColeta = {
       console.error("Erro ao renderizar pontos", error);
     }
   },
-  // Função de pesquisa
-  async configurarControles() {
-    const inputPesquisa = document.querySelector(".campo-busca-coleta");
-    const selectOrdenacao = document.querySelector(".campo-ordenacao-coleta");
-    let pontos = [];
-    try {
-      pontos = await apiPontosColeta.getPontosColeta();
-    } catch (error) {
-      console.error("Erro ao carregar pontos para a pesquisa", error);
-    }
-    // Filtra e depois ordena
-    const aplicarFiltroEOrdenacao = () => {
-      const termo = inputPesquisa.value.toLowerCase().trim();
 
-      // Filtra pela pesquisa
-      let resultado = pontos.filter((ponto) => {
-        // Verifica o tipo
-        const tipo = ponto.tipo_ponto.toLowerCase();
-        const tipoMatch = tipo.includes(termo);
-        // Verifica as observações (se tiver)
-        let observacaoMatch = false;
-        if (ponto.observacoes) {
-          observacaoMatch = ponto.observacoes.toLowerCase().includes(termo);
-        }
-        return tipoMatch || observacaoMatch;
-      });
-      // Ordena com o que está marcado
-      const criterio = selectOrdenacao.value;
-      // Ordenação 
-      resultado.sort((a, b) => {
-        if (criterio === "latitude") {
-          return a.latitude - b.latitude;
-        } else if (criterio === "longitude") {
-          return a.longitude - b.longitude;
-        } else if (criterio === "tipo") {
-          return a.tipo_ponto.localeCompare(b.tipo_ponto);
-        }
-        return 0;
-      });
-      // Mostra na tela
-      const gridCards = document.querySelector(".grid-cards-coleta");
-      gridCards.innerHTML = ""; // Limpa a tela
-      if (resultado.length === 0) {
-        gridCards.innerHTML = "<p>Nenhum ponto encontrado.</p>"; // Caso não encontre nada
-      } else {
-        resultado.forEach((ponto) => this.adicionarPontoNaLista(ponto));
-      }
-    };
-    // As funcionalidades, sempre que mudarem, chamam para filtrar e ordenar
-    inputPesquisa.oninput = aplicarFiltroEOrdenacao;
-    selectOrdenacao.onchange = aplicarFiltroEOrdenacao;
-  },
-
-  // Função para adicionar um card de ponto de coleta
+  //-------- Função para adicionar um card de ponto de coleta --------
   adicionarPontoNaLista(ponto) {
     const listaPontos = document.querySelector(".grid-cards-coleta");
 
@@ -97,12 +44,23 @@ export const uiPontosColeta = {
     const divAcoes = document.createElement("div");
     divAcoes.classList.add("acoes-card-coleta");
 
-    // Mostar
+    // Mostar (botão)
     const botaoMostrar = document.createElement("button");
     botaoMostrar.classList.add("btn-acao", "btn-ver-coleta");
     botaoMostrar.innerHTML = '<i class="fa-solid fa-eye"></i>';
 
-    // Editar
+    // Se clicar em mostrar abre a visualização
+    botaoMostrar.onclick = async () => {
+      try {
+        const dadosCompletos = await apiPontosColeta.getPontoColetaById(ponto.id_ponto);
+        uiPontosColeta.abrirModalVisualizacao(dadosCompletos);
+      } catch (error) {
+        console.error("Erro ao carregar dados do ponto:", error);
+        alert("Erro ao carregar dados do ponto.");
+      }
+    };
+
+    // Editar (botão)
     const botaoEditar = document.createElement("button");
     botaoEditar.classList.add("btn-acao", "btn-editar");
     botaoEditar.innerHTML = '<i class="fa-solid fa-pen-to-square"></i>';
@@ -110,26 +68,11 @@ export const uiPontosColeta = {
     // Se clicar em editar pergunta se tem certeza e exclui
     botaoEditar.onclick = async () => {
       try {
-        const dadosCompletos = await apiPontosColeta.getPontoColetaById(
-          ponto.id_ponto,
-        );
+        const dadosCompletos = await apiPontosColeta.getPontoColetaById(ponto.id_ponto);
         uiPontosColeta.preencherFormulario(dadosCompletos);
       } catch (error) {
         console.error("Erro ao carregar dados para edição:", error);
         alert("Erro ao carregar dados para edição.");
-      }
-    };
-
-    // Se clicar em mostrar abre a visualização
-    botaoMostrar.onclick = async () => {
-      try {
-        const dadosCompletos = await apiPontosColeta.getPontoColetaById(
-          ponto.id_ponto,
-        );
-        uiPontosColeta.abrirModalVisualizacao(dadosCompletos);
-      } catch (error) {
-        console.error("Erro ao carregar dados do ponto:", error);
-        alert("Erro ao carregar dados do ponto.");
       }
     };
 
@@ -147,7 +90,7 @@ export const uiPontosColeta = {
     listaPontos.appendChild(card);
   },
 
-  // Função para preencher o formulário de edição
+  //-------- Função para preencher o formulário de edição --------
   async preencherFormulario(ponto) {
     // Guardo o id para saber qual é
     this.idPontoSendoEditado = ponto.id_ponto;
@@ -174,84 +117,7 @@ export const uiPontosColeta = {
     document.querySelector("#adicionar-coleta").classList.remove("invisivel");
   },
 
-  // Função para limpar o formulário total
-  limparFormulario() {
-    this.idPontoSendoEditado = null;
-    const form = document.querySelector(".form-coleta");
-    if (form) form.reset();
-    document.querySelector("#btn-salvar-coleta").textContent =
-      "Cadastrar Ponto";
-    document.querySelector("#adicionar-coleta h3").textContent =
-      "Cadastrar Novo Ponto de Coleta";
-  },
-
-  // Função para capturar os dados do formulário e transformar em objeto
-  capturarDadosFormulario() {
-    return {
-      tipo_ponto: document.querySelector("#select-tipo").value,
-      latitude: parseFloat(document.querySelector("#input-lat").value),
-      longitude: parseFloat(document.querySelector("#input-lng").value),
-
-      altitude:
-        parseFloat(document.querySelector("#input-altitude").value) || null,
-      data_coleta: document.querySelector("#input-data").value || null,
-      id_equipe:
-        parseInt(document.querySelector("#select-equipe").value) || null,
-      ph: parseFloat(document.querySelector("#input-ph").value) || null,
-      turbidez:
-        parseFloat(document.querySelector("#input-turbidez").value) || null,
-      temperatura:
-        parseFloat(document.querySelector("#input-temp").value) || null,
-
-      entorno: document.querySelector("#input-entorno").value,
-      observacoes: document.querySelector("#input-obs").value,
-    };
-  },
-
-  // Função para configurar os eventos do formulário
-  configurarEventos() {
-    const form = document.querySelector(".form-coleta");
-    if (form) {
-      form.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        // Captura os dados
-        const dados = this.capturarDadosFormulario();
-
-        try {
-          // Se tiver um id edita, senão cria
-          if (this.idPontoSendoEditado) {
-            dados.id_ponto = this.idPontoSendoEditado;
-            await apiPontosColeta.updatePontoColeta(dados);
-            this.mostrarNotificacao("Ponto atualizado com sucesso!");
-          } else {
-            await apiPontosColeta.createPontoColeta(dados);
-            this.mostrarNotificacao("Ponto criado com sucesso!");
-          }
-          // Limpa o formulário e fecha
-          this.limparFormulario();
-          document
-            .querySelector("#adicionar-coleta")
-            .classList.add("invisivel");
-          this.renderizarPontosColeta(); // Atualiza a tela com o novo
-        } catch (error) {
-          console.error("Erro ao salvar", error);
-        }
-      });
-    }
-  },
-  // Mostrar aviso criar e editar
-  mostrarNotificacao(mensagem) {
-    const aviso = document.querySelector("#aviso-flutuante");
-    const texto = document.querySelector("#aviso-texto");
-    // Troca o texdto
-    texto.textContent = mensagem;
-    aviso.classList.remove("invisivel");
-    // Some em 2 segs
-    setTimeout(() => {
-      aviso.classList.add("invisivel");
-    }, 2000);
-  },
-  // Mostra todas as informações
+  //-------- Mostra todas as informações --------
   abrirModalVisualizacao(ponto) {
     const divDados = document.querySelector("#dados-visualizacao-coleta");
     // Pega todos os dados que tem
@@ -307,5 +173,138 @@ export const uiPontosColeta = {
 
     // Mostra na tela
     document.querySelector("#modal-ver-coleta").classList.remove("invisivel");
+  },
+
+  //-------- Função para limpar o formulário total --------
+  limparFormulario() {
+    this.idPontoSendoEditado = null;
+    const form = document.querySelector(".form-coleta");
+    if (form) form.reset();
+    document.querySelector("#btn-salvar-coleta").textContent =
+      "Cadastrar Ponto";
+    document.querySelector("#adicionar-coleta h3").textContent =
+      "Cadastrar Novo Ponto de Coleta";
+  },
+
+  //-------- Função para capturar os dados do formulário e transformar em objeto --------
+  capturarDadosFormulario() {
+    return {
+      tipo_ponto: document.querySelector("#select-tipo").value,
+      latitude: parseFloat(document.querySelector("#input-lat").value),
+      longitude: parseFloat(document.querySelector("#input-lng").value),
+
+      altitude:
+        parseFloat(document.querySelector("#input-altitude").value) || null,
+      data_coleta: document.querySelector("#input-data").value || null,
+      id_equipe:
+        parseInt(document.querySelector("#select-equipe").value) || null,
+      ph: parseFloat(document.querySelector("#input-ph").value) || null,
+      turbidez:
+        parseFloat(document.querySelector("#input-turbidez").value) || null,
+      temperatura:
+        parseFloat(document.querySelector("#input-temp").value) || null,
+
+      entorno: document.querySelector("#input-entorno").value,
+      observacoes: document.querySelector("#input-obs").value,
+    };
+  },
+
+  //-------- Função para configurar os eventos do formulário --------
+  configurarEventos() {
+    const form = document.querySelector(".form-coleta");
+    if (form) {
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        // Captura os dados
+        const dados = this.capturarDadosFormulario();
+
+        try {
+          // Se tiver um id edita, senão cria
+          if (this.idPontoSendoEditado) {
+            dados.id_ponto = this.idPontoSendoEditado;
+            await apiPontosColeta.updatePontoColeta(dados);
+            this.mostrarNotificacao("Ponto atualizado com sucesso!");
+          } else {
+            await apiPontosColeta.createPontoColeta(dados);
+            this.mostrarNotificacao("Ponto criado com sucesso!");
+          }
+          // Limpa o formulário e fecha
+          this.limparFormulario();
+          document
+            .querySelector("#adicionar-coleta")
+            .classList.add("invisivel");
+          this.renderizarPontosColeta(); // Atualiza a tela com o novo
+          this.configurarControles(); // Reconfigura os controles para atualizar a lista de pontos
+        } catch (error) {
+          console.error("Erro ao salvar", error);
+        }
+      });
+    }
+  },
+
+  //-------- Função de pesquisa e ordenação --------
+  async configurarControles() {
+    const inputPesquisa = document.querySelector(".campo-busca-coleta");
+    const selectOrdenacao = document.querySelector(".campo-ordenacao-coleta");
+    let pontos = [];
+    try {
+      pontos = await apiPontosColeta.getPontosColeta();
+    } catch (error) {
+      console.error("Erro ao carregar pontos para a pesquisa", error);
+    }
+    // Filtra e depois ordena
+    const aplicarFiltroEOrdenacao = () => {
+      const termo = inputPesquisa.value.toLowerCase().trim();
+
+      // Filtra pela pesquisa
+      let resultado = pontos.filter((ponto) => {
+        // Verifica o tipo
+        const tipo = ponto.tipo_ponto.toLowerCase();
+        const tipoMatch = tipo.includes(termo);
+        // Verifica as observações (se tiver)
+        let observacaoMatch = false;
+        if (ponto.observacoes) {
+          observacaoMatch = ponto.observacoes.toLowerCase().includes(termo);
+        }
+        return tipoMatch || observacaoMatch;
+      });
+      // Ordena com o que está marcado
+      const criterio = selectOrdenacao.value;
+      // Ordenação
+      resultado.sort((a, b) => {
+        if (criterio === "latitude") {
+          return a.latitude - b.latitude;
+        } else if (criterio === "longitude") {
+          return a.longitude - b.longitude;
+        } else if (criterio === "tipo") {
+          return a.tipo_ponto.localeCompare(b.tipo_ponto);
+        }
+        return 0;
+      });
+      // Mostra na tela
+      const gridCards = document.querySelector(".grid-cards-coleta");
+      gridCards.innerHTML = ""; // Limpa a tela
+      if (resultado.length === 0) {
+        gridCards.innerHTML = "<p>Nenhum ponto encontrado.</p>"; // Caso não encontre nada
+      } else {
+        resultado.forEach((ponto) => this.adicionarPontoNaLista(ponto));
+      }
+    };
+    // As funcionalidades, sempre que mudarem, chamam para filtrar e ordenar
+    inputPesquisa.oninput = aplicarFiltroEOrdenacao;
+    selectOrdenacao.onchange = aplicarFiltroEOrdenacao;
+  },
+
+  //-------- Mostrar aviso criar e editar --------
+  mostrarNotificacao(mensagem) {
+    const aviso = document.querySelector("#aviso-flutuante");
+    const texto = document.querySelector("#aviso-texto");
+    // Troca o texdto
+    texto.textContent = mensagem;
+    aviso.classList.remove("invisivel");
+    // Some em 2 segs
+    setTimeout(() => {
+      aviso.classList.add("invisivel");
+    }, 2000);
   },
 };
