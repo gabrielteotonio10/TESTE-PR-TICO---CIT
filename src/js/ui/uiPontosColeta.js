@@ -23,6 +23,58 @@ export const uiPontosColeta = {
       console.error("Erro ao renderizar pontos", error);
     }
   },
+  // Função de pesquisa
+  async configurarControles() {
+    const inputPesquisa = document.querySelector(".campo-busca-coleta");
+    const selectOrdenacao = document.querySelector(".campo-ordenacao-coleta");
+    let pontos = [];
+    try {
+      pontos = await apiPontosColeta.getPontosColeta();
+    } catch (error) {
+      console.error("Erro ao carregar pontos para a pesquisa", error);
+    }
+    // Filtra e depois ordena
+    const aplicarFiltroEOrdenacao = () => {
+      const termo = inputPesquisa.value.toLowerCase().trim();
+
+      // Filtra pela pesquisa
+      let resultado = pontos.filter((ponto) => {
+        // Verifica o tipo
+        const tipo = ponto.tipo_ponto.toLowerCase();
+        const tipoMatch = tipo.includes(termo);
+        // Verifica as observações (se tiver)
+        let observacaoMatch = false;
+        if (ponto.observacoes) {
+          observacaoMatch = ponto.observacoes.toLowerCase().includes(termo);
+        }
+        return tipoMatch || observacaoMatch;
+      });
+      // Ordena com o que está marcado
+      const criterio = selectOrdenacao.value;
+      // Ordenação 
+      resultado.sort((a, b) => {
+        if (criterio === "latitude") {
+          return a.latitude - b.latitude;
+        } else if (criterio === "longitude") {
+          return a.longitude - b.longitude;
+        } else if (criterio === "tipo") {
+          return a.tipo_ponto.localeCompare(b.tipo_ponto);
+        }
+        return 0;
+      });
+      // Mostra na tela
+      const gridCards = document.querySelector(".grid-cards-coleta");
+      gridCards.innerHTML = ""; // Limpa a tela
+      if (resultado.length === 0) {
+        gridCards.innerHTML = "<p>Nenhum ponto encontrado.</p>"; // Caso não encontre nada
+      } else {
+        resultado.forEach((ponto) => this.adicionarPontoNaLista(ponto));
+      }
+    };
+    // As funcionalidades, sempre que mudarem, chamam para filtrar e ordenar
+    inputPesquisa.oninput = aplicarFiltroEOrdenacao;
+    selectOrdenacao.onchange = aplicarFiltroEOrdenacao;
+  },
 
   // Função para adicionar um card de ponto de coleta
   adicionarPontoNaLista(ponto) {

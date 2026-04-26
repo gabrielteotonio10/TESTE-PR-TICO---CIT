@@ -52,7 +52,7 @@ const pontosColetaApi = {
       // Pega o item inserido
       return data[0];
     } catch (error) {
-      alert("Erro ao criar ponto de coleta");
+      alert("Erro ao criar ponto de coleta, verifique os dados e tente novamente");
       throw error;
     }
   },
@@ -75,7 +75,7 @@ const pontosColetaApi = {
       return data[0];
     } catch (error) {
       console.error("Detalhe do erro:", error);
-      alert("Erro ao editar ponto de coleta");
+      alert("Erro ao editar ponto de coleta, verifique os dados e tente novamente");
       throw error;
     }
   },

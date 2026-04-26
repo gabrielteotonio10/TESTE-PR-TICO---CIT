@@ -7,4 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
   uiPontosColeta.configurarEventos();
   // Mostra os pontos de coleta
   uiPontosColeta.renderizarPontosColeta();
+  // Configura a pesquisa e ordenação
+  uiPontosColeta.configurarControles();
 });
