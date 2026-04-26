@@ -7,14 +7,20 @@ document.addEventListener("DOMContentLoaded", () => {
   const linkHome = document.querySelectorAll(".pagina-inicial");
   const linkPontos = document.querySelectorAll(".pagina-pontos");
   const linkEquipes = document.querySelectorAll(".pagina-equipes");
-  // Mostragem de coletra e equipe
+  // Mostragem de coleta e equipe
   const secaoPontos = document.querySelector("#pontos-coleta");
   const secaoEquipes = document.querySelector("#pontos-equipe");
   // Função para adicionar e remover a classe invisivel
-  const mostrar = (elemento) =>
-    elemento && elemento.classList.remove("invisivel");
-  const esconder = (elemento) =>
-    elemento && elemento.classList.add("invisivel");
+  const mostrar = (elemento) => {
+    if (elemento) {
+      elemento.classList.remove("invisivel");
+    }
+  };
+  const esconder = (elemento) => {
+    if (elemento) {
+      elemento.classList.add("invisivel");
+    }
+  };
 
   // Ouvintes de Evento
   linkHome.forEach((link) => {
@@ -50,14 +56,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const btnAdicionarEquipePontos = document.querySelector(".btn-adicionar-equipe-pontos");
   const modalAdicionarEquipe = document.querySelector("#adicionar-equipe");
   const botoesFechar = document.querySelectorAll(".btn-fechar");
-  
+
   // Abre o modal de adicionar ponto de coleta
   if (btnAdicionarColeta) {
-    btnAdicionarColeta.addEventListener("click",async (e) => {
+    btnAdicionarColeta.addEventListener("click", async (e) => {
       e.preventDefault();
       // Limpa o formulario
       uiPontosColeta.limparFormulario();
-      await uiEquipes.atualizarOpcoesEquipe(); // Atualiza as opções de equipe 
+      await uiEquipes.atualizarOpcoesEquipe(); // Atualiza as opções de equipe
       mostrar(modalAdicionarColeta);
     });
   }
@@ -72,13 +78,12 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   // Adicionar equipe detro de adicionar ponto
   if (btnAdicionarEquipePontos) {
-    btnAdicionarEquipePontos.addEventListener("click", async(e) => {
+    btnAdicionarEquipePontos.addEventListener("click", async (e) => {
       e.preventDefault();
       // Limpa o formulario
       uiEquipes.limparFormulario();
       mostrar(modalAdicionarEquipe);
     });
-    
   }
   // Fecha qualquer modal
   botoesFechar.forEach((btn) => {

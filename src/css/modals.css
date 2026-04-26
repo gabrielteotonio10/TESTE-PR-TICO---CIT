@@ -11,7 +11,7 @@
   z-index: 1000;
   justify-content: center;
   align-items: flex-start;
-  overflow-y: auto;
+  overflow-y: auto; /*Permite rolagem*/
   padding: 40px 10px;
 }
 .modal-conteudo {

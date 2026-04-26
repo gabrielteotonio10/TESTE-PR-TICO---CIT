@@ -48,11 +48,12 @@ const equipesApi = {
 
       if (error) {
         console.error("Erro ao salvar no Supabase:", error.message);
-        throw new Error(`Erro no servidor: ${error.message}`);
+        throw error;
       }
       // Pega o item inserido
       return data[0];
     } catch (error) {
+      console.error("Detalhe do erro:", error);
       alert("Erro ao criar nova equipe");
       throw error;
     }
@@ -90,14 +91,12 @@ const equipesApi = {
         .eq("id_equipe", id_equipe);
 
       if (error) {
-        throw new Error(`Erro no servidor: ${error.message}`);
+        throw error;
       }
       return true;
     } catch (error) {
       console.error("Detalhe do erro:", error);
-      alert(
-        "Erro ao excluir equipe. Verifique se ela possui pontos de coleta vinculados.",
-      );
+      alert("Erro ao excluir equipe. Verifique se ela possui pontos de coleta vinculados.");
       throw error;
     }
   },

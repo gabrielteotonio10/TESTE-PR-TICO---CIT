@@ -53,9 +53,7 @@ export const uiPontosColeta = {
     // Se clicar em mostrar abre a visualização
     botaoMostrar.onclick = async () => {
       try {
-        const dadosCompletos = await apiPontosColeta.getPontoColetaById(
-          ponto.id_ponto,
-        );
+        const dadosCompletos = await apiPontosColeta.getPontoColetaById(ponto.id_ponto);
         uiPontosColeta.abrirModalVisualizacao(dadosCompletos);
       } catch (error) {
         console.error("Erro ao carregar dados do ponto:", error);
@@ -134,15 +132,27 @@ export const uiPontosColeta = {
   },
 
   //-------- Mostra todas as informações --------
-  abrirModalVisualizacao(ponto) {
+  async abrirModalVisualizacao(ponto) {
     const divDados = document.querySelector("#dados-visualizacao-coleta");
+    // Pega o nome da equipe, se tiver
+    let nomeEquipe = "Nenhuma equipe associada";
+    if (ponto.id_equipe) {
+      try {
+        const equipe = await apiEquipes.getEquipeById(ponto.id_equipe);
+        if (equipe) {
+          nomeEquipe = equipe.nome_equipe;
+        }
+      } catch (error) {
+        console.error("Erro ao buscar nome da equipe:", error);
+      }
+    }
     // Pega todos os dados que tem
     divDados.innerHTML = `
       <p><strong>Tipo:</strong> ${ponto.tipo_ponto}</p>
       <p><strong>Coordenadas:</strong> Lat ${ponto.latitude} / Lng ${ponto.longitude}</p>
       <p><strong>Altitude:</strong> ${ponto.altitude ? ponto.altitude + " m" : "Não informada"}</p>
       <p><strong>Data da Coleta:</strong> ${ponto.data_coleta ? ponto.data_coleta : "Não informada"}</p>
-      <p><strong>ID Equipe:</strong> ${ponto.id_equipe ? ponto.id_equipe : "Nenhuma"}</p>
+      <p><strong>Nome da equipe:</strong> ${nomeEquipe}</p>
       <p><strong>Qualidade da Água:</strong> pH: ${ponto.ph ? ponto.ph : "--"} | Turbidez: ${ponto.turbidez ? ponto.turbidez : "--"} | Temp: ${ponto.temperatura ? ponto.temperatura + "°C" : "--"}</p>
       <p><strong>Entorno:</strong> ${ponto.entorno ? ponto.entorno : "Sem observações do entorno."}</p>
       <p><strong>Observações Gerais:</strong> ${ponto.observacoes ? ponto.observacoes : "Nenhuma."}</p>
