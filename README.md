@@ -144,38 +144,38 @@ TESTE-PRATICO-CIT/
 
 ```
 ┌──────────────────────────────────────────────────┐
-│                   index.html                      │  ← Estrutura HTML + todos os modais
+│                   index.html                     │  ← Estrutura HTML + todos os modais
 └────────────────────┬─────────────────────────────┘
                      │
         ┌────────────┴────────────┐
         │                         │
 ┌───────▼───────┐       ┌─────────▼───────┐
-│   pages.js    │       │    main.js       │  ← Inicialização e orquestração
-│  (navegação)  │       │  (bootstrap)     │
+│   pages.js    │       │    main.js      │  ← Inicialização e orquestração
+│  (navegação)  │       │  (bootstrap)    │
 └───────────────┘       └────────┬────────┘
                                   │
               ┌───────────────────┼───────────────────┐
               │                                         │
    ┌──────────▼──────────┐             ┌───────────────▼──────────┐
-   │   ui/uiPontosColeta  │             │      ui/uiEquipes         │  ← Camada UI
-   │  (renderização DOM)  │             │    (renderização DOM)     │
+   │   ui/uiPontosColeta │             │      ui/uiEquipes        │  ← Camada UI
+   │  (renderização DOM) │             │    (renderização DOM)    │
    └──────────┬──────────┘             └───────────────┬──────────┘
               │                                         │
    ┌──────────▼──────────┐             ┌───────────────▼──────────┐
-   │ api/apiPontosColeta  │             │      api/apiEquipes       │  ← Camada API
-   │  (CRUD Supabase)     │             │      (CRUD Supabase)      │
+   │ api/apiPontosColeta │             │      api/apiEquipes      │  ← Camada API
+   │  (CRUD Supabase)    │             │      (CRUD Supabase)     │
    └──────────┬──────────┘             └───────────────┬──────────┘
               │                                         │
               └──────────────┬──────────────────────────┘
                              │
                    ┌─────────▼─────────┐
-                   │    supabase.js     │  ← Conexão com o banco
-                   │  (cliente único)   │
+                   │    supabase.js    │  ← Conexão com o banco
+                   │  (cliente único)  │
                    └─────────┬─────────┘
                              │
                    ┌─────────▼─────────┐
-                   │  Supabase Cloud    │  ← PostgreSQL em nuvem
-                   │  (PostgreSQL)      │
+                   │  Supabase Cloud   │  ← PostgreSQL em nuvem
+                   │  (PostgreSQL)     │
                    └───────────────────┘
 ```
 
@@ -221,7 +221,7 @@ CREATE TABLE pontos_coleta (
 
 ```
 ┌─────────────────────┐          ┌──────────────────────────┐
-│       equipes        │          │      pontos_coleta        │
+│       equipes       │          │      pontos_coleta       │
 ├─────────────────────┤          ├──────────────────────────┤
 │ id_equipe (PK)      │◄─────────│ id_equipe (FK, nullable) │
 │ nome_equipe         │  1    N  │ id_ponto (PK)            │
