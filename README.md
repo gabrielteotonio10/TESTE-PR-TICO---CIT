@@ -5,7 +5,7 @@
 
 ---
 
-LINK PARA TESTE: https://vercel.com/gabrielteotonio80-2375s-projects/teste-pratico-cit
+Link: https://vercel.com/gabrielteotonio80-2375s-projects/teste-pratico-cit
 
 ## 📋 Índice
 
