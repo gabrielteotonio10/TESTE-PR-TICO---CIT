@@ -6,6 +6,7 @@
 ---
 
 Link de deploy: [https://vercel.com/gabrielteotonio80-2375s-projects/teste-pratico-cit](https://teste-pratico-cit.vercel.app/)
+Observação: O arquivo .env não foi adicionado ao .gitignore. Fiz isso para garantir que os avaliadores possam clonar o repositório e testar a aplicação imediatamente.
 
 ## 📋 Índice
 
@@ -190,7 +191,7 @@ O esquema relacional foi criado no PostgreSQL via Supabase. A relação entre as
 ```sql
 -- Tabela de Equipes
 CREATE TABLE equipes (
-    id_equipe        INT AUTO_INCREMENT PRIMARY KEY,
+    id_equipe        SERIAL PRIMARY KEY,
     nome_equipe      VARCHAR(100) NOT NULL,
     integrantes      TEXT,
     contato          VARCHAR(50),
@@ -199,7 +200,7 @@ CREATE TABLE equipes (
 
 -- Tabela de Pontos de Coleta
 CREATE TABLE pontos_coleta (
-    id_ponto      INT AUTO_INCREMENT PRIMARY KEY,
+    id_ponto      SERIAL PRIMARY KEY,
     tipo_ponto    VARCHAR(50) NOT NULL,     -- Nascente, Vereda, Córrego
     latitude      DECIMAL(10, 8) NOT NULL,
     longitude     DECIMAL(11, 8) NOT NULL,
@@ -306,7 +307,7 @@ npm run preview
 
 ### ⚙️ Configuração do Supabase
 
-O projeto já está configurado com uma instância Supabase ativa. A conexão é feita em `src/js/supabase.js`:
+O projeto já está configurado com uma instância Supabase ativa. A conexão é feita em `src/js/supabase.js` como o `.env`:
 
 ```javascript
 import { createClient } from "@supabase/supabase-js";
@@ -317,7 +318,7 @@ const supabaseKey = "SUA_CHAVE_AQUI";
 export const supabase = createClient(supabaseUrl, supabaseKey);
 ```
 
-> Caso queira usar seu próprio Supabase: crie um projeto em [supabase.com](https://supabase.com), execute o `schema.sql` no editor SQL do painel, e substitua a URL e a chave anônima no arquivo acima.
+> Caso queira usar seu próprio Supabase: crie um projeto em [supabase.com](https://supabase.com), execute o `schema.sql` no editor SQL do painel, e substitua a URL e a chave anônima no arquivo `.env`.
 
 ---
 

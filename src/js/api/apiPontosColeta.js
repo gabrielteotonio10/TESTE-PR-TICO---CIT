@@ -10,7 +10,6 @@ const pontosColetaApi = {
 
       if (error) throw error;
 
-      console.log("Dados recebidos:", data);
       return data || [];
     } catch (error) {
       console.error("Erro técnico:", error.message);

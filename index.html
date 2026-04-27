@@ -76,7 +76,6 @@
                     <select id="select-tipo" required>
                         <option value="">Selecione o tipo...</option>
                         <option>Nascente</option>
-                        <option>Nascente</option>
                         <option>Vereda</option>
                         <option>Córrego</option>
                     </select>
@@ -84,11 +83,11 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label>Latitude*</label>
-                        <input type="text" id="input-lat" placeholder="-15.123" required>
+                        <input type="text" id="input-lat" placeholder="-15.123" required maxlength="12">
                     </div>
                     <div class="form-group">
                         <label>Longitude*</label>
-                        <input type="text" id="input-lng" placeholder="-47.123" required>
+                        <input type="text" id="input-lng" placeholder="-47.123" required maxlength="12">
                     </div>
                 </div>
                 <div class="form-row">
@@ -113,7 +112,7 @@
                         <input type="number" id="input-ph" step="0.1" min="0" max="14" placeholder="0.0">
                     </div>
                     <div class="form-group"><label>Turbidez</label>
-                        <input type="number" id="input-turbidez" step="0.1" min="0" max="14" placeholder="0.0">
+                        <input type="number" id="input-turbidez" step="0.1" min="0" max="999.9" placeholder="0.0">
                     </div>
                 </div>
                 <div class="form-row">
@@ -142,19 +141,19 @@
             <form class="form-equipe">
                 <div class="form-group">
                     <label>Nome da Equipe*</label>
-                    <input type="text" id="input-nome-equipe" placeholder="Ex: Equipe Alfa" required>
+                    <input type="text" id="input-nome-equipe" placeholder="Ex: Equipe Alfa" required maxlength="100">
                 </div>
                 <div class="form-group">
                     <label>Integrantes</label>
-                    <textarea id="input-integrantes" placeholder="Nomes separados por vírgula" rows="3"></textarea>
+                    <textarea id="input-integrantes" placeholder="Nomes separados por vírgula" rows="3" maxlength="1000"></textarea>
                 </div>
                 <div class="form-group">
                     <label>Contato</label>
-                    <input type="text" id="input-contato" placeholder="(31) 9999-9999">
+                    <input type="text" id="input-contato" placeholder="(31) 9999-9999" maxlength="50">
                 </div>
                 <div class="form-group">
                     <label>Região de Atuação</label>
-                    <input type="text" id="input-regiao" placeholder="Ex: Cerrado Mineiro">
+                    <input type="text" id="input-regiao" placeholder="Ex: Cerrado Mineiro" maxlength="100">
                 </div>
                 <button type="submit" id="btn-salvar-equipe" class="btn-salvar">Cadastrar Equipe</button>
             </form>
@@ -183,14 +182,16 @@
         <div class="modal-conteudo">
             <button type="button" class="btn-fechar"><i class="fa-solid fa-x"></i></button>
             <h3>Detalhes da Equipe</h3>
-    
+
             <div id="dados-visualizacao-equipe" class="detalhes-conteudo">
                 <!-- Os detalhes das equipes serão inseridos aqui -->
             </div>
-    
+
             <div class="modal-buttons">
-                <button type="button" id="btn-modal-ver-editar-equipe" class="btn-editar-visualizacao">Editar Equipe</button>
-                <button type="button" id="btn-modal-ver-excluir-equipe" class="btn-excluir-visualizacao">Excluir Equipe</button>
+                <button type="button" id="btn-modal-ver-editar-equipe" class="btn-editar-visualizacao">Editar
+                    Equipe</button>
+                <button type="button" id="btn-modal-ver-excluir-equipe" class="btn-excluir-visualizacao">Excluir
+                    Equipe</button>
             </div>
         </div>
     </div>

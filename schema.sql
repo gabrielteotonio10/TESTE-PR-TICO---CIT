@@ -1,6 +1,6 @@
 -- Criação da tabela Equipes primeiro 
 CREATE TABLE equipes (
-    id_equipe INT AUTO_INCREMENT PRIMARY KEY,
+    id_equipe SERIAL PRIMARY KEY,
     nome_equipe VARCHAR(100) NOT NULL,
     integrantes TEXT,  
     contato VARCHAR(50),
@@ -9,7 +9,7 @@ CREATE TABLE equipes (
 
 -- Criação da tabela de Pontos de Coleta
 CREATE TABLE pontos_coleta (
-    id_ponto INT AUTO_INCREMENT PRIMARY KEY,
+    id_ponto SERIAL PRIMARY KEY,
     tipo_ponto VARCHAR(50) NOT NULL,    -- Nascente, vereda e córrego
     latitude DECIMAL(10, 8) NOT NULL,   
     longitude DECIMAL(11, 8) NOT NULL,  
