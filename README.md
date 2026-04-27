@@ -6,6 +6,7 @@
 ---
 
 Link de deploy: [https://vercel.com/gabrielteotonio80-2375s-projects/teste-pratico-cit](https://teste-pratico-cit.vercel.app/)
+
 Observação: O arquivo .env não foi adicionado ao .gitignore. Fiz isso para garantir que os avaliadores possam clonar o repositório e testar a aplicação imediatamente.
 
 ## 📋 Índice
