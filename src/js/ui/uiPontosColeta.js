@@ -170,6 +170,7 @@ export const uiPontosColeta = {
     // Botão de excluir
     const btnExcluir = document.querySelector("#btn-modal-ver-excluir");
     btnExcluir.onclick = async () => {
+      // Mostra um modal de confirmação
       const confirmarExclusao = document.querySelector("#alerta-excluir");
       confirmarExclusao.classList.remove("invisivel");
       const btnConfirmar = document.querySelector("#btn-confirmar-exclusao");

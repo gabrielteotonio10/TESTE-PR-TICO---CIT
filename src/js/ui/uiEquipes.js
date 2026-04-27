@@ -115,6 +115,7 @@ export const uiEquipes = {
   async abrirModalVisualizacao(equipe) {
     const divDados = document.querySelector("#dados-visualizacao-equipe");
     try {
+      // Capturando a quantidade de pontos para mostrar na visualização
       const pontos = await apiPontosColeta.getPontosColeta();
       let quantidadePontos = 0;
       pontos.forEach((ponto) => {
@@ -147,6 +148,7 @@ export const uiEquipes = {
     // Botão de excluir
     const btnExcluir = document.querySelector("#btn-modal-ver-excluir-equipe");
     btnExcluir.onclick = async () => {
+      // Mostra um modal de confirmação
       const confirmarExclusao = document.querySelector("#alerta-excluir");
       confirmarExclusao.classList.remove("invisivel");
       const btnConfirmar = document.querySelector("#btn-confirmar-exclusao");

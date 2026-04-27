@@ -5,7 +5,7 @@
 
 ---
 
-Link: [https://vercel.com/gabrielteotonio80-2375s-projects/teste-pratico-cit](https://teste-pratico-cit.vercel.app/)
+Link de deploy: [https://vercel.com/gabrielteotonio80-2375s-projects/teste-pratico-cit](https://teste-pratico-cit.vercel.app/)
 
 ## 📋 Índice
 
@@ -156,8 +156,8 @@ TESTE-PRATICO-CIT/
 │  (navegação)  │       │  (bootstrap)    │
 └───────────────┘       └────────┬────────┘
                                  │
-              ┌──────────────────┼──────────────────────┐
-              │                                         │
+              ┌──────────────────┼─────────────────────┐
+              │                                        │
    ┌──────────▼──────────┐             ┌───────────────▼──────────┐
    │   ui/uiPontosColeta │             │      ui/uiEquipes        │  ← Camada UI
    │  (renderização DOM) │             │    (renderização DOM)    │
